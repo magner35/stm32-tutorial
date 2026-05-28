@@ -5,7 +5,7 @@ flash: loopc.bin
 	st-flash --connect-under-reset write loopc.bin 0x08000000
 
 loopc.elf: linker.ld reset_exception_handler.o loopc.o
-	arm-none-eabi-ld -T linker.ld -o loopc.elf reset_exception_handler.o loopc.o
+	arm-none-eabi-ld -T linker.ld -o loopc.elf reset_exception_handler.o loopc.o -Map output.map
 
 reset_exception_handler.o: reset_exception_handler.s
 	arm-none-eabi-as -o reset_exception_handler.o reset_exception_handler.s

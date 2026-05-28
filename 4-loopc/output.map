@@ -1,0 +1,108 @@
+
+There are no discarded input sections
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+Flash            0x08000000         0x00010000
+SRAM             0x20000000         0x00005000
+*default*        0x00000000         0xffffffff
+
+Linker script and memory map
+
+
+.isr_vector     0x08000000      0x130
+                0x08000000        0x4 LONG 0x20005000
+                0x08000004        0x4 LONG 0x8000131 (_reset_exception_handler | 0x1)
+                0x00000130                        . = 0x130
+ *fill*         0x08000008      0x128 
+
+.text           0x08000130       0x64
+                0x08000130                        . = ALIGN (0x4)
+ *(.text)
+ .text          0x08000130       0x40 reset_exception_handler.o
+                0x08000130                _reset_exception_handler
+ .text          0x08000170       0x24 loopc.o
+                0x08000170                start
+                0x08000194                        . = ALIGN (0x4)
+
+.glue_7         0x08000194        0x0
+ .glue_7        0x08000194        0x0 linker stubs
+
+.glue_7t        0x08000194        0x0
+ .glue_7t       0x08000194        0x0 linker stubs
+
+.vfp11_veneer   0x08000194        0x0
+ .vfp11_veneer  0x08000194        0x0 linker stubs
+
+.v4_bx          0x08000194        0x0
+ .v4_bx         0x08000194        0x0 linker stubs
+
+.iplt           0x08000194        0x0
+ .iplt          0x08000194        0x0 reset_exception_handler.o
+
+.rodata         0x08000194        0x8
+                0x08000194                        . = ALIGN (0x4)
+ *(.rodata)
+ .rodata        0x08000194        0x8 loopc.o
+                0x0800019c                        . = ALIGN (0x4)
+
+.rel.dyn        0x0800019c        0x0
+ .rel.iplt      0x0800019c        0x0 reset_exception_handler.o
+
+.bss            0x20000000        0x4
+                0x20000000                        . = ALIGN (0x4)
+                0x20000000                        _bss_start = .
+ *(.bss)
+ .bss           0x20000000        0x0 reset_exception_handler.o
+ .bss           0x20000000        0x4 loopc.o
+                0x20000004                        . = ALIGN (0x4)
+                0x20000004                        _bss_end = .
+
+.data           0x20000004        0x4 load address 0x0800019c
+                0x20000004                        . = ALIGN (0x4)
+                0x0800019c                        _flash_data_start = LOADADDR (.data)
+                0x20000004                        _sram_data_start = .
+ *(.data)
+ .data          0x20000004        0x0 reset_exception_handler.o
+ .data          0x20000004        0x4 loopc.o
+                0x20000008                        . = ALIGN (0x4)
+                0x20000008                        _sram_data_end = .
+LOAD reset_exception_handler.o
+LOAD loopc.o
+OUTPUT(loopc.elf elf32-littlearm)
+LOAD linker stubs
+
+.igot.plt       0x20000008        0x0 load address 0x080001a0
+ .igot.plt      0x20000008        0x0 reset_exception_handler.o
+
+.ARM.attributes
+                0x00000000       0x2f
+ .ARM.attributes
+                0x00000000       0x21 reset_exception_handler.o
+ .ARM.attributes
+                0x00000021       0x2d loopc.o
+
+.comment        0x00000000       0x45
+ .comment       0x00000000       0x45 loopc.o
+                                 0x46 (size before relaxing)
+
+.debug_info     0x00000000       0xe0
+ .debug_info    0x00000000       0xe0 loopc.o
+
+.debug_abbrev   0x00000000       0x6b
+ .debug_abbrev  0x00000000       0x6b loopc.o
+
+.debug_aranges  0x00000000       0x20
+ .debug_aranges
+                0x00000000       0x20 loopc.o
+
+.debug_line     0x00000000      0x12a
+ .debug_line    0x00000000      0x12a loopc.o
+
+.debug_str      0x00000000      0x12d
+ .debug_str     0x00000000      0x12d loopc.o
+                                0x170 (size before relaxing)
+
+.debug_frame    0x00000000       0x28
+ .debug_frame   0x00000000       0x28 loopc.o
