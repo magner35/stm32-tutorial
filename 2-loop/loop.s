@@ -2,10 +2,11 @@
 .syntax unified
 .thumb
 
+.thumb_func
 .global reset_exception_handler
 
-.section code
+.section .text
 
 reset_exception_handler:
 add r0, r0, 1
-bl reset_exception_handler
+b reset_exception_handler
