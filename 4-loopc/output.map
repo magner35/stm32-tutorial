@@ -87,22 +87,22 @@ LOAD linker stubs
  .comment       0x00000000       0x45 loopc.o
                                  0x46 (size before relaxing)
 
-.debug_info     0x00000000       0xe0
- .debug_info    0x00000000       0xe0 loopc.o
+.debug_info     0x00000000       0xe5
+ .debug_info    0x00000000       0xe5 loopc.o
 
-.debug_abbrev   0x00000000       0x6b
- .debug_abbrev  0x00000000       0x6b loopc.o
+.debug_abbrev   0x00000000       0x71
+ .debug_abbrev  0x00000000       0x71 loopc.o
 
 .debug_aranges  0x00000000       0x20
  .debug_aranges
                 0x00000000       0x20 loopc.o
 
-.debug_line     0x00000000      0x12a
- .debug_line    0x00000000      0x12a loopc.o
+.debug_line     0x00000000      0x128
+ .debug_line    0x00000000      0x128 loopc.o
 
-.debug_str      0x00000000      0x12d
- .debug_str     0x00000000      0x12d loopc.o
-                                0x170 (size before relaxing)
+.debug_str      0x00000000      0x130
+ .debug_str     0x00000000      0x130 loopc.o
+                                0x173 (size before relaxing)
 
 .debug_frame    0x00000000       0x28
  .debug_frame   0x00000000       0x28 loopc.o
