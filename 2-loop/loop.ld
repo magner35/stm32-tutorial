@@ -3,6 +3,6 @@ SECTIONS {
         LONG(0x20000000 + 20K);
         LONG(reset_exception_handler | 1);
         . = 0x130;
-        loop.o(code)
+        loop.o(.text)
     }
 }
