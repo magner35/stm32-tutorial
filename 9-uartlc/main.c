@@ -21,12 +21,7 @@ static void enable_usart(void)
     RCC->APB2ENR |= RCC_APB2ENR_IOPBEN;
 
     // configure PB10 as alternate function output push-pull 2MHz
-    uint32_t gpiob_crh = GPIOB->CRH;
-    gpiob_crh &= ~GPIO_CRH_MODE10_0;
-    gpiob_crh |= GPIO_CRH_MODE10_1;
-    gpiob_crh &= ~GPIO_CRH_CNF10_0;
-    gpiob_crh |= GPIO_CRH_CNF10_1;
-    GPIOB->CRH = gpiob_crh;
+    GPIOB->CRH = (GPIOB->CRH & ~(GPIO_CRH_MODE10_0 | GPIO_CRH_CNF10_0)) | GPIO_CRH_MODE10_1 | GPIO_CRH_CNF10_1;
 
     // enable USART3 clock
     RCC->APB1ENR |= RCC_APB1ENR_USART3EN;
@@ -35,8 +30,5 @@ static void enable_usart(void)
     USART3->BRR = 0x0341;
 
     // enable USART3 and transmitter
-    uint32_t usart3_cr1 = USART3->CR1;
-    usart3_cr1 |= USART_CR1_UE;
-    usart3_cr1 |= USART_CR1_TE;
-    USART3->CR1 = usart3_cr1;
+    USART3->CR1 = USART3->CR1 | USART_CR1_UE | USART_CR1_TE;
 }
