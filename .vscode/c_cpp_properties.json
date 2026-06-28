@@ -17,7 +17,8 @@
         {
             "name": "arm",
             "includePath": [
-                "${workspaceFolder}/**"
+                "${workspaceFolder}/**",
+                "C:\\Users\\user\\STM32CubeF1-master\\Drivers\\CMSIS\\**"
             ],
             "defines": [
                 "_DEBUG",
